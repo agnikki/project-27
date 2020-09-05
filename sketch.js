@@ -2,47 +2,53 @@ const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
 
-var engine, world;
-var polygon;
-var block1, block2, block3, block4, block5,block6,block7,block8,block9;
-
-function preload(){
-  //backgroundImg = loadImage("sprites/bg.png");
-}
-
+var particles = [];
+var plinkos = [];
+var divisions = [];
+var divisionHeight=300;
 
 function setup() {
-  createCanvas(800,400);
-
+  createCanvas(480,800);
   engine = Engine.create();
   world = engine.world;
-  ground=new Ground(795,2945,300,10)
-  //level 1
-  block1=new Block(330,235,30,40);
-  block2=new Block(360,235,30,40);
-  block3=new Block(390,235,30,40);
-  block4=new Block(420,235,30,40);
-  block5=new Block(450,235,30,40);
-  //level 2
-  block6=new Block(360,195,30,40);
-  block7=new Block(390,195,30,40);
-  block8=new Block(420,195,30,40);
-  //level 3
-  block9=new Block(390,155,30,40);
 }
 
 function draw() {
-  background(255,255,255); 
+  background(0,0,0);
   Engine.update(engine); 
-  ground.display();
-  block1.display();
-  block2.display();
-  block3.display();
-  block4.display();
-  block5.display();
-  block6.display();
-  block7.display();
-  block8.display();
-  block9.display();
-  drawSprites();
+  if(frameCount%60===0) {
+    particles.push(new Particle(random(100,400),10,10));
+  }
+  
+
+for(var k =0; k<=480; k=k+80)
+{
+  divisions.push(new Division(k,650,10,divisionHeight));
+}
+
+for(var j = 40; j<=innerWidth; j=j+50)
+{
+  plinkos.push(new Plinko(j,75,10));
+}
+
+for(var j= 15; j<=width-10; j=j+50){
+  plinkos.push(new Plinko(j,175,10));
+}
+for(var j = 40; j<=innerWidth; j=j+50)
+{
+  plinkos.push(new Plinko(j,275,10));
+}
+for(var j= 15; j<=width-10; j=j+50){
+  plinkos.push(new Plinko(j,375,10));
+}
+
+for(var j=0;j<particles.length; j++) {
+  particles[j].display();
+}
+for(var j=0;j<plinkos.length; j++) {
+  plinkos[j].display();
+}
+for(var k=0;k < divisions.length; k++){
+  divisions[k].display();
+}
 }

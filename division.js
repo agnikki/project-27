@@ -1,5 +1,5 @@
   
-class Ground {
+class Division {
     constructor(x,y,width,height) {
       var options = {
           isStatic: true

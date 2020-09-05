@@ -6,7 +6,7 @@ class Rope{
     var options={
         bodyA:bodyA,
         bodyB:bodyB,
-        bodyB:{x:this.offSetX,y:this.offSetY}
+        pointB:{x:this.offSetX,y:this.offSetY}
     }
     this.rope=Constraint.create(options);
     World.add(world,this.rope);

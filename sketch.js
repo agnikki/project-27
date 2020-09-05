@@ -1,54 +1,63 @@
-const Engine = Matter.Engine;
-const World= Matter.World;
-const Bodies = Matter.Bodies;
 
-var particles = [];
-var plinkos = [];
-var divisions = [];
-var divisionHeight=300;
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Body = Matter.Body;
+const Constraint = Matter.Constraint;
+var bobDiameter=20;
+function preload()
+{
+	
+}
 
 function setup() {
-  createCanvas(480,800);
-  engine = Engine.create();
-  world = engine.world;
+	createCanvas(800, 700);
+
+
+	engine = Engine.create();
+	world = engine.world;
+
+	//Create the Bodies Here.
+	roof = new Roof(240,200,200,20);
+		
+bobObject1 =new Bob(200,400,20);
+bobObject2 =new Bob(220,400,20);
+bobObject3 =new Bob(240,400,20);
+bobObject4 =new Bob(260,400,20);
+bobObject5 =new Bob(280,400,20);
+rope1 = new Rope(bobObject1.body,roof.body,-bobDiameter*2,0);
+rope2 = new Rope(bobObject2.body,roof.body,-bobDiameter*1,0);
+rope3 = new Rope(bobObject3.body,roof.body,0,0);
+rope4 = new Rope(bobObject4.body,roof.body,bobDiameter*1,0);
+rope5 = new Rope(bobObject5.body,roof.body,bobDiameter*2,0);
+	Engine.run(engine);
+  
 }
+
 
 function draw() {
-  background(0,0,0);
-  Engine.update(engine); 
-  if(frameCount%60===0) {
-    particles.push(new Particle(random(100,400),10,10));
-  }
-  
+  rectMode(CENTER);
+  background(255);
+  roof.display();
+  rope1.display();
+  rope2.display();
+  rope3.display();
+  rope4.display();
+  rope5.display();
+  bobObject1.display();
+  bobObject2.display();
+  bobObject3.display();
+  bobObject4.display();
+  bobObject5.display();
+  drawSprites();
+ 
+}
+function keyPressed() {
+	if(keyCode === UP_ARROW) {
+	
+	  Matter.Body.applyForce(bobObject1.body,bobObject1.body.position,{x:-45,y:45});
+	  Matter.B
+	}
+	}
 
-for(var k =0; k<=480; k=k+80)
-{
-  divisions.push(new Division(k,650,10,divisionHeight));
-}
 
-for(var j = 40; j<=innerWidth; j=j+50)
-{
-  plinkos.push(new Plinko(j,75,10));
-}
-
-for(var j= 15; j<=width-10; j=j+50){
-  plinkos.push(new Plinko(j,175,10));
-}
-for(var j = 40; j<=innerWidth; j=j+50)
-{
-  plinkos.push(new Plinko(j,275,10));
-}
-for(var j= 15; j<=width-10; j=j+50){
-  plinkos.push(new Plinko(j,375,10));
-}
-
-for(var j=0;j<particles.length; j++) {
-  particles[j].display();
-}
-for(var j=0;j<plinkos.length; j++) {
-  plinkos[j].display();
-}
-for(var k=0;k < divisions.length; k++){
-  divisions[k].display();
-}
-}

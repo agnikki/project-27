@@ -1,52 +1,48 @@
-
 const Engine = Matter.Engine;
-const World = Matter.World;
+const World= Matter.World;
 const Bodies = Matter.Bodies;
-const Body = Matter.Body;
-const Constraint = Matter.Constraint;
-var bobDiameter=20;
-function preload()
-{
-	
+
+var engine, world;
+var polygon;
+var block1, block2, block3, block4, block5,block6,block7,block8,block9;
+
+function preload(){
+  //backgroundImg = loadImage("sprites/bg.png");
 }
+
 
 function setup() {
-	createCanvas(800, 700);
+  createCanvas(800,400);
 
-
-	engine = Engine.create();
-	world = engine.world;
-
-	//Create the Bodies Here.
-
-	roof = new Roof(240,200,200,20);
-		
-	bobObject1 =new Bob(200,400,20);
-bobObject2 =new Bob(220,400,20);
-bobObject3 =new Bob(240,400,20);
-bobObject4 =new Bob(260,400,20);
-bobObject5 =new Bob(280,400,20);
-rope1 = new Rope(bobObject1.body,roof.body,-bobDiameter*2,0);
-	
-  
+  engine = Engine.create();
+  world = engine.world;
+  ground=new Ground(795,2945,300,10)
+  //level 1
+  block1=new Block(330,235,30,40);
+  block2=new Block(360,235,30,40);
+  block3=new Block(390,235,30,40);
+  block4=new Block(420,235,30,40);
+  block5=new Block(450,235,30,40);
+  //level 2
+  block6=new Block(360,195,30,40);
+  block7=new Block(390,195,30,40);
+  block8=new Block(420,195,30,40);
+  //level 3
+  block9=new Block(390,155,30,40);
 }
-
 
 function draw() {
-  rectMode(CENTER);
-  background(255);
-  Engine.run(engine);
-  roof.display();
-  rope1.display();
-  bobObject1.display();
-  bobObject2.display();
-  bobObject3.display();
-  bobObject4.display();
-  bobObject5.display();
-  
+  background(255,255,255); 
+  Engine.update(engine); 
+  ground.display();
+  block1.display();
+  block2.display();
+  block3.display();
+  block4.display();
+  block5.display();
+  block6.display();
+  block7.display();
+  block8.display();
+  block9.display();
   drawSprites();
- 
 }
-
-
-
